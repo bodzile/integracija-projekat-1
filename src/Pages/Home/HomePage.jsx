@@ -1,7 +1,7 @@
 import Hero from "./Hero.jsx";
 
 
-const Home = () => {
+const HomePage = () => {
     return (
         <>
             <Hero/>
@@ -9,4 +9,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;
