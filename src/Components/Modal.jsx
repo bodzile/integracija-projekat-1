@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {validateProduct} from "../Services/productValidator.js";
 
 
 const Modal = ({isOpen, onCloseConfirm, onCloseCancel}) => {
@@ -8,16 +9,26 @@ const Modal = ({isOpen, onCloseConfirm, onCloseCancel}) => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [rating, setRating] = useState(1);
+    const [error, setError] = useState(false);
+
+    if (!isOpen) {
+        return null;
+    }
 
     const createProductObject = () => {
         let obj = {title, category, description, price, rating};
         return obj;
     };
 
-
-    if (!isOpen) {
-        return null;
-    }
+    const confirmAction = () => {
+        const result = validateProduct({title, category, description, price, rating});
+        if(!result.isError) {
+            onCloseConfirm(createProductObject());
+            onCloseCancel();
+        }
+        else
+            setError(result.message);
+    };
 
     return (
         <div className="fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black/60 backdrop-blur-sm">
@@ -48,6 +59,7 @@ const Modal = ({isOpen, onCloseConfirm, onCloseCancel}) => {
                             <input id="rating" type="number" value={rating} onChange={(event) => setRating(event.target.value)} className="rounded-md border border-slate-300 px-3 py-2"/>
                         </div>
                     </form>
+                    {error && <p className="text-red-600">{error}</p>}
                 </div>
                 <div className="flex shrink-0 flex-wrap items-center justify-end pt-4">
                     <button onClick={onCloseCancel}
@@ -55,7 +67,7 @@ const Modal = ({isOpen, onCloseConfirm, onCloseCancel}) => {
                         type="button">
                         Cancel
                     </button>
-                    <button onClick={() => {onCloseConfirm(createProductObject()); onCloseCancel(); }}
+                    <button onClick={confirmAction}
                         className="ml-2 rounded-md border border-transparent bg-green-600 px-4 py-2 text-center text-sm text-white shadow-md transition-all hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type="button">
                         Confirm
