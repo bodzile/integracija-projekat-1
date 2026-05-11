@@ -1,12 +1,13 @@
 
-const ProductCard = ({id, title, description, price}) => {
+const ProductCard = ({id, imgUrl, category, title, description, price}) => {
     return (
-        <div>
-            <p>{id}</p>
-            <p>{title}</p>
+        <a href={"products/product-detail/" + id} className="flex flex-col gap-1">
+            <img className="bc-text rounded-md" src={imgUrl} alt="product-image"  />
+            <p className="text-accent">{category}</p>
+            <p className="font-bold">{title}</p>
             <p>{description}</p>
             <p>${price}</p>
-        </div>
+        </a>
     );
 };
 
