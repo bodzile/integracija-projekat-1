@@ -13,13 +13,17 @@ const ProductsContainer = () => {
         });
     }, []);
 
+    // const sortedProducts = () => {
+    //
+    // }
+
     return (
-        <div className="w-full px-4 mt-5 lg:pl-80 lg:pr-16">
+        <div className="w-full px-4 mt-5 xl:pl-80 xl:pr-16">
             <h2>All products</h2>
             <div>
 
                 {error && <p className="text-red-400">{error}</p>}
-                {loading && <p className="text-red-400">Products are loading...</p>}
+                {loading && <p className="text-grey-400">Products are loading...</p>}
                 {!error && !loading && <Filters/>}
                 {!error && !loading && <ProductList products={products}/>}
             </div>

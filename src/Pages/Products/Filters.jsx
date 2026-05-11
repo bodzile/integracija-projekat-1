@@ -5,17 +5,17 @@ const Filters = () => {
 
     return (
         <>
-            <button type="button" onClick={() => setIsOpen(true)} className="fixed left-4 top-20 z-40 rounded-md bc-accent px-4 py-2 font-bold text-surface shadow-lg lg:hidden">
+            <button type="button" onClick={() => setIsOpen(true)} className="fixed left-4 top-20 z-40 rounded-md bc-accent px-4 py-2 font-bold text-surface shadow-lg xl:hidden">
                 Filters
             </button>
 
             {isOpen && (
-                <button type="button" onClick={() => setIsOpen(false)} className="fixed inset-0 z-40 bg-black/50 lg:hidden">
+                <button type="button" onClick={() => setIsOpen(false)} className="fixed inset-0 z-40 bg-black/50 xl:hidden">
                     Close filters
                 </button>
             )}
 
-            <div className={`fixed left-0 top-16 z-50 h-screen w-72 max-w-[85vw] bc-surface-dim shadow-xl transition-transform duration-300 lg:translate-x-0 ${
+            <div className={`fixed left-0 top-16 z-50 h-screen w-72 max-w-[85vw] bc-surface-dim shadow-xl transition-transform duration-300 xl:translate-x-0 ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 }`}>
                 <div className="flex h-full flex-col">
@@ -25,7 +25,7 @@ const Filters = () => {
                             type="button"
                             onClick={() => setIsOpen(false)}
                             aria-label="Close filters"
-                            className="rounded-md px-3 py-1 text-2xl leading-none text-accent lg:hidden"
+                            className="rounded-md px-3 py-1 text-2xl leading-none text-accent xl:hidden"
                         >
                             &times;
                         </button>
