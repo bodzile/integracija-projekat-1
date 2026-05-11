@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import ProductList from "./ProductList.jsx";
 import getProducts from "./../../Services/api.js";
+import Filters from "./Filters.jsx";
 
 const ProductsContainer = () => {
     const [products, setProducts] = useState([]);
@@ -17,12 +18,10 @@ const ProductsContainer = () => {
     }, []);
 
     return (
-        <div className="w-full lg:px-16 px-4 mt-5">
+        <div className="w-full px-4 mt-5 lg:pl-80 lg:pr-16">
             <h2>All products</h2>
-            <div className="flex gap-4">
-                <div>
-                    Filters
-                </div>
+            <div>
+                {!error && <Filters/>}
                 {error && <p className="text-red-400">{error}</p>}
                 {!error && <ProductList products={products}/>}
             </div>

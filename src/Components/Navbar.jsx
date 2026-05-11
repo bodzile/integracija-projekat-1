@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <header className="lg:px-16 px-4 bc-surface-dim flex flex-wrap items-center py-2 shadow-md">
+        <header className="fixed top-0 left-0 w-full lg:px-16 px-4 bc-surface-dim flex flex-wrap items-center py-2 shadow-md">
             <div className="flex-1 flex justify-between items-center">
                 <a href="/" className="text-xl">Product management</a>
             </div>

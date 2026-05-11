@@ -41,6 +41,7 @@
   }
 
   body {
+    padding-top: 55px;
     background-color: var(--color-surface);
     color: var(--color-text);
   }
