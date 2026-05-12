@@ -2,32 +2,50 @@ import {useState} from "react";
 import {validateProduct} from "../Services/productValidator.js";
 
 
-const Modal = ({isOpen, onCloseConfirm, onCloseCancel}) => {
+const Modal = ({isOpen, onCloseConfirm, onCloseCancel, productData, resetProductData}) => {
 
-    const [title, setTitle] = useState("");
-    const [category, setCategory] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
-    const [rating, setRating] = useState(1);
+    const id = productData?.id ?? -1;
+    const [title, setTitle] = useState(productData?.title ?? "");
+    const [category, setCategory] = useState(productData?.category ?? "");
+    const [description, setDescription] = useState(productData?.description ?? "");
+    const [price, setPrice] = useState(productData?.price ?? 0);
+    const [rating, setRating] = useState(productData?.rating ?? 1);
     const [error, setError] = useState(false);
 
     if (!isOpen) {
         return null;
     }
 
+    const resetForm = () => {
+        setTitle("");
+        setCategory("");
+        setDescription("");
+        setPrice(0);
+        setRating(1);
+        setError(false);
+    };
+
     const createProductObject = () => {
-        let obj = {title, category, description, price, rating};
+        let obj = {id, title, category, description, price, rating};
         return obj;
     };
 
     const confirmAction = () => {
         const result = validateProduct({title, category, description, price, rating});
         if(!result.isError) {
-            onCloseConfirm(createProductObject());
+            onCloseConfirm?.(createProductObject());
+            resetForm();
+            resetProductData();
             onCloseCancel();
         }
         else
             setError(result.message);
+    };
+
+    const cancelAction = () => {
+        resetForm();
+        resetProductData();
+        onCloseCancel();
     };
 
     return (
@@ -62,7 +80,7 @@ const Modal = ({isOpen, onCloseConfirm, onCloseCancel}) => {
                     {error && <p className="text-red-600">{error}</p>}
                 </div>
                 <div className="flex shrink-0 flex-wrap items-center justify-end pt-4">
-                    <button onClick={onCloseCancel}
+                    <button onClick={cancelAction}
                         className="rounded-md border border-transparent px-4 py-2 text-center text-sm text-slate-600 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type="button">
                         Cancel

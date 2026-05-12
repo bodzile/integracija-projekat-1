@@ -1,19 +1,30 @@
 import {useState} from "react";
 import Modal from "../../Components/Modal.jsx";
 
-const ProductList = ({products, createProduct}) => {
+const ProductList = ({products, createProduct, updateProduct, deleteProduct}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalAction, setModalAction] = useState(null);
+    const [productData, setProductData] = useState(null);
+
+    const getProductById = (id) => (products.find(x => x.id === id));
+    const resetProductData = () => setProductData(null);
 
     return (
         <div className="w-full overflow-x-auto">
             <button
                 type="button"
-                onClick={() => setIsModalOpen(true)}
-                className="rounded-md border border-blue-400 px-3 py-1 text-blue-400"
-            >
+                onClick={() => {setProductData(null); setModalAction(() => createProduct); setIsModalOpen(true)} }
+                className="rounded-md border border-blue-400 px-3 py-1 text-blue-400">
                 Add product
             </button>
-            <Modal isOpen={isModalOpen} onCloseConfirm={createProduct} onCloseCancel={() => setIsModalOpen(false)} />
+            <Modal
+                key={productData?.id ?? "create-product"}
+                resetProductData={resetProductData}
+                productData={productData}
+                isOpen={isModalOpen}
+                onCloseConfirm={modalAction}
+                onCloseCancel={() => setIsModalOpen(false)}
+            />
             <table className="mt-7 w-full min-w-[900px] border-collapse border border-[var(--color-text)]">
                 <thead className="bc-surface-dim">
                     <tr>
@@ -49,16 +60,14 @@ const ProductList = ({products, createProduct}) => {
                             </td>
                             <td className="border border-[var(--color-text)] px-4 py-3">
                                 <div className="flex gap-2">
-                                    <button
+                                    <button onClick={() => { setProductData(getProductById(id)); setModalAction(() => updateProduct); setIsModalOpen(true)}}
                                         type="button"
-                                        className="rounded-md border border-[var(--color-text-heading)] px-3 py-1 text-text-heading"
-                                    >
+                                        className="rounded-md border border-[var(--color-text-heading)] px-3 py-1 text-text-heading">
                                         Edit
                                     </button>
-                                    <button
+                                    <button onClick={() => deleteProduct(id) }
                                         type="button"
-                                        className="rounded-md border border-red-400 px-3 py-1 text-red-400"
-                                    >
+                                        className="rounded-md border border-red-400 px-3 py-1 text-red-400">
                                         Delete
                                     </button>
                                 </div>

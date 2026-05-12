@@ -28,6 +28,18 @@ const ProductsContainer = () => {
         ));
     };
 
+    const updateProduct = (updatedFields) => {
+        setProducts(old =>
+            old.map((product) =>
+                product.id === updatedFields.id ? { ...product, ...updatedFields } : product
+            )
+        );
+    };
+
+    const deleteProduct = (id) => {
+        setProducts(old => old.filter(x => x.id !== id));
+    };
+
     return (
         <div className="w-full px-4 mt-5 xl:pl-80 xl:pr-16">
             <h2>All products</h2>
@@ -36,7 +48,7 @@ const ProductsContainer = () => {
                 {error && <p className="text-red-400">{error}</p>}
                 {loading && <p className="text-grey-400">Products are loading...</p>}
                 {!error && !loading && <Filters/>}
-                {!error && !loading && <ProductList products={products} createProduct={createProduct}/>}
+                {!error && !loading && <ProductList products={products} createProduct={createProduct} updateProduct={updateProduct} deleteProduct={deleteProduct} />}
             </div>
         </div>
     );
