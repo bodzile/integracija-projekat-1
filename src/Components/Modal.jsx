@@ -50,7 +50,7 @@ const Modal = ({isOpen, onCloseConfirm, onCloseCancel, productData, resetProduct
 
     return (
         <div className="fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black/60 backdrop-blur-sm">
-            <div className="relative m-4 w-2/5 min-w-[40%] max-w-[40%] rounded-lg bc-surface-dim text-text p-4 shadow-sm">
+            <div className="relative m-4 w-4/5 lg:w-2/5  max-w-lg lg:max-w-md rounded-lg bc-surface-dim text-text p-4 shadow-sm">
                 <div className="flex shrink-0 items-center pb-4 text-xl font-medium">
                     Add product
                 </div>
