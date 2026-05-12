@@ -3,6 +3,29 @@ import {useState} from "react";
 const Filters = ({categories, filterProducts}) => {
     const [isOpen, setIsOpen] = useState(false);
 
+    const [title, setTitle] = useState(null);
+    const [filterCategories, setFilterCategories] = useState([]);
+    const [minPrice, setMinPrice] = useState(null);
+    const [maxPrice, setMaxPrice] = useState(null);
+
+    const buildFilterObject = () => {
+        const res = {};
+
+        if (title) res.title = title;
+        if (minPrice !== null) res.minPrice = minPrice;
+        if (maxPrice !== null) res.maxPrice = maxPrice;
+        if (filterCategories.length > 0) res.categories = filterCategories;
+
+        return res;
+    };
+
+    const toggleCategory = (category) => {
+        setFilterCategories((oldCategories) =>
+            oldCategories.includes(category)
+                ? oldCategories.filter((x) => x !== category)
+                : [...oldCategories, category]
+        );
+    };
 
     return (
         <>
@@ -36,14 +59,19 @@ const Filters = ({categories, filterProducts}) => {
 
                         <div className="space-y-3">
                             <h6>Title</h6>
-                            <input type="text" placeholder="Enter title here"  className="w-full rounded-md border border-white/10 bc-surface px-3 py-2 text-text outline-none focus:border-(--color-accent)"/>
+                            <input onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Enter title here"  className="w-full rounded-md border border-white/10 bc-surface px-3 py-2 text-text outline-none focus:border-(--color-accent)"/>
                         </div>
 
                         <div className="space-y-3">
                             <h6>Category</h6>
                             {categories.map((category) => (
-                                <label className="flex items-center gap-3">
-                                    <input type="checkbox" className="accent-[var(--color-accent)]" />
+                                <label key={category} className="flex items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        checked={filterCategories.includes(category)}
+                                        onChange={() => toggleCategory(category)}
+                                        className="accent-[var(--color-accent)]"
+                                    />
                                     <span>{category}</span>
                                 </label>
                             ))}
@@ -53,12 +81,12 @@ const Filters = ({categories, filterProducts}) => {
                         <div className="space-y-3">
                             <h6>Price</h6>
                             <div className="flex gap-3">
-                                <input
+                                <input onChange={(e) => setMinPrice(Number(e.target.value))}
                                     type="number"
                                     placeholder="Min"
                                     className="w-full rounded-md border border-white/10 bc-surface px-3 py-2 text-text outline-none focus:border-[var(--color-accent)]"
                                 />
-                                <input
+                                <input onChange={(e) => setMaxPrice(Number(e.target.value))}
                                     type="number"
                                     placeholder="Max"
                                     className="w-full rounded-md border border-white/10 bc-surface px-3 py-2 text-text outline-none focus:border-[var(--color-accent)]"
@@ -67,7 +95,7 @@ const Filters = ({categories, filterProducts}) => {
                         </div>
 
                         <div className="space-y-3">
-                            <button className="w-full rounded-md py-2 border border-(--color-accent)">Filtriraj</button>
+                            <button onClick={() => filterProducts(buildFilterObject())} className="w-full rounded-md py-2 border border-(--color-accent)">Filtriraj</button>
                         </div>
 
                     </div>

@@ -5,11 +5,15 @@ import Filters from "./Filters.jsx";
 
 const ProductsContainer = () => {
     const [products, setProducts] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
     const {getData, error, loading} = useProducts();
 
     useEffect(() => {
         getData().then((products) => {
-            if (products) setProducts(products);
+            if (products) {
+                setProducts(products);
+                setAllProducts(products);
+            }
         });
     }, []);
 
@@ -23,9 +27,10 @@ const ProductsContainer = () => {
 
     const createProduct =({title, category, description, price, rating}) => {
         let id = createProductId();
-        setProducts( old => (
-            [...old, {id, title, category, description, price, rating}]
-        ));
+        const product = {id, title, category, description, price, rating};
+
+        setProducts(old => [...old, product]);
+        setAllProducts(old => [...old, product]);
     };
 
     const updateProduct = (updatedFields) => {
@@ -34,17 +39,32 @@ const ProductsContainer = () => {
                 product.id === updatedFields.id ? { ...product, ...updatedFields } : product
             )
         );
+        setAllProducts(old =>
+            old.map((product) =>
+                product.id === updatedFields.id ? { ...product, ...updatedFields } : product
+            )
+        );
     };
 
     const deleteProduct = (id) => {
         setProducts(old => old.filter(x => x.id !== id));
+        setAllProducts(old => old.filter(x => x.id !== id));
     };
 
     const filterProducts = (filters) => {
-        return [];
+        setProducts(
+            allProducts.filter((product) => {
+                const matchesTitle = !filters.title || product.title.toLowerCase().includes(filters.title.toLowerCase());
+                const matchesCategory = !filters.categories || filters.categories.includes(product.category);
+                const matchesMinPrice = filters.minPrice === undefined || Number(product.price) >= filters.minPrice;
+                const matchesMaxPrice = filters.maxPrice === undefined || Number(product.price) <= filters.maxPrice;
+
+                return matchesTitle && matchesCategory && matchesMinPrice && matchesMaxPrice;
+            })
+        );
     };
 
-    const getCategories = () => (Array.from(new Set(products.map((product) => product.category))));
+    const getCategories = () => (Array.from(new Set(allProducts.map((product) => product.category))));
 
     return (
         <div className="w-full px-4 mt-5 xl:pl-80 xl:pr-16">
