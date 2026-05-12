@@ -25,8 +25,8 @@ const ProductList = ({products, createProduct, updateProduct, deleteProduct}) =>
                 onCloseConfirm={modalAction}
                 onCloseCancel={() => setIsModalOpen(false)}
             />
-            <table className="mt-7 w-full min-w-[900px] border-collapse border border-[var(--color-text)]">
-                <thead className="bc-surface-dim">
+            <table className="mt-7 w-full border border-[var(--color-text)]">
+                <thead className="hidden lg:table-header-group bc-surface-dim">
                     <tr>
                         <th className="border border-[var(--color-text-heading)] px-4 py-3 text-left">Id</th>
                         <th className="border border-[var(--color-text-heading)] px-4 py-3 text-left">Title</th>
@@ -39,26 +39,26 @@ const ProductList = ({products, createProduct, updateProduct, deleteProduct}) =>
                 </thead>
                 <tbody>
                     {products.map(({id, title, description, price, rating, category}) => (
-                        <tr key={id}>
-                            <td className="border border-[var(--color-text)] px-4 py-3 font-bold text-text-heading">
-                                {id}
+                        <tr className="border border-[var(--color-text)]  flex flex-col lg:table-row py-3 px-3" key={id}>
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-3 font-bold text-text-heading">
+                                <span className="font-bold lg:hidden">Id: </span> {id}
                             </td>
-                            <td className="border border-[var(--color-text)] px-4 py-3 font-bold text-text-heading">
-                                {title}
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-1 font-bold text-text-heading">
+                                <span className="font-bold lg:hidden">Title: </span>{title}
                             </td>
-                            <td className="border border-[var(--color-text)] px-4 py-3 text-accent">
-                                {category}
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-3 text-accent">
+                                <span className="font-bold lg:hidden">Category: </span>{category}
                             </td>
-                            <td className="border border-[var(--color-text)] px-4 py-3">
-                                {description}
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-3">
+                                <span className="font-bold lg:hidden">Description: </span>{description}
                             </td>
-                            <td className="border border-[var(--color-text)] px-4 py-3">
-                                ${price}
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-3">
+                                <span className="font-bold lg:hidden">Price: </span>${price}
                             </td>
-                            <td className="border border-[var(--color-text)] px-4 py-3 font-bold text-text-heading">
-                                {rating}
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-3 font-bold text-text-heading">
+                                <span className="font-bold lg:hidden">Rating: </span>{rating}
                             </td>
-                            <td className="border border-[var(--color-text)] px-4 py-3">
+                            <td className="lg:border lg:border-[var(--color-text)] px-1 py-1 lg:px-4 lg:py-3">
                                 <div className="flex gap-2">
                                     <button onClick={() => { setProductData(getProductById(id)); setModalAction(() => updateProduct); setIsModalOpen(true)}}
                                         type="button"
