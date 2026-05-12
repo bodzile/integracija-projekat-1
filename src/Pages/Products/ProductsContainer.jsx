@@ -40,6 +40,12 @@ const ProductsContainer = () => {
         setProducts(old => old.filter(x => x.id !== id));
     };
 
+    const filterProducts = (filters) => {
+        return [];
+    };
+
+    const getCategories = () => (Array.from(new Set(products.map((product) => product.category))));
+
     return (
         <div className="w-full px-4 mt-5 xl:pl-80 xl:pr-16">
             <h2>All products</h2>
@@ -47,7 +53,7 @@ const ProductsContainer = () => {
 
                 {error && <p className="text-red-400">{error}</p>}
                 {loading && <p className="text-grey-400">Products are loading...</p>}
-                {!error && !loading && <Filters/>}
+                {!error && !loading && <Filters categories={getCategories()} filterProducts={filterProducts} />}
                 {!error && !loading && <ProductList products={products} createProduct={createProduct} updateProduct={updateProduct} deleteProduct={deleteProduct} />}
             </div>
         </div>

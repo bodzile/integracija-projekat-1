@@ -1,7 +1,8 @@
 import {useState} from "react";
 
-const Filters = () => {
+const Filters = ({categories, filterProducts}) => {
     const [isOpen, setIsOpen] = useState(false);
+
 
     return (
         <>
@@ -32,34 +33,25 @@ const Filters = () => {
                     </div>
 
                     <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5">
-                        <section className="space-y-3">
+
+                        <div className="space-y-3">
+                            <h6>Title</h6>
+                            <input type="text" placeholder="Enter title here"  className="w-full rounded-md border border-white/10 bc-surface px-3 py-2 text-text outline-none focus:border-(--color-accent)"/>
+                        </div>
+
+                        <div className="space-y-3">
                             <h6>Category</h6>
-                            <label className="flex items-center gap-3">
-                                <input type="checkbox" className="accent-[var(--color-accent)]" />
-                                <span>All products</span>
-                            </label>
-                            <label className="flex items-center gap-3">
-                                <input type="checkbox" className="accent-[var(--color-accent)]" />
-                                <span>Electronics</span>
-                            </label>
-                            <label className="flex items-center gap-3">
-                                <input type="checkbox" className="accent-[var(--color-accent)]" />
-                                <span>Furniture</span>
-                            </label>
-                            <label className="flex items-center gap-3">
-                                <input type="checkbox" className="accent-[var(--color-accent)]" />
-                                <span>Clothing</span>
-                            </label>
-                        </section>
+                            {categories.map((category) => (
+                                <label className="flex items-center gap-3">
+                                    <input type="checkbox" className="accent-[var(--color-accent)]" />
+                                    <span>{category}</span>
+                                </label>
+                            ))}
+
+                        </div>
 
                         <div className="space-y-3">
                             <h6>Price</h6>
-                            <input
-                                type="range"
-                                min="0"
-                                max="1000"
-                                className="w-full accent-[var(--color-accent)]"
-                            />
                             <div className="flex gap-3">
                                 <input
                                     type="number"
@@ -75,16 +67,9 @@ const Filters = () => {
                         </div>
 
                         <div className="space-y-3">
-                            <h6>Availability</h6>
-                            <label className="flex items-center gap-3">
-                                <input type="checkbox" className="accent-[var(--color-accent)]" />
-                                <span>In stock</span>
-                            </label>
-                            <label className="flex items-center gap-3">
-                                <input type="checkbox" className="accent-[var(--color-accent)]" />
-                                <span>On sale</span>
-                            </label>
+                            <button className="w-full rounded-md py-2 border border-(--color-accent)">Filtriraj</button>
                         </div>
+
                     </div>
                 </div>
             </div>
