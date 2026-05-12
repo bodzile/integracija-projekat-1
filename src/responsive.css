@@ -1,0 +1,33 @@
+@media (max-width: 1023px) {
+  :root {
+    --fs-300: 0.87rem;
+    --fs-400: 1rem;
+    --fs-500: 1.15rem;
+    --fs-600: 1.323rem;
+    --fs-700: 1.521rem;
+    --fs-800: 1.749rem;
+    --fs-900: 2.011rem;
+    --fs-1000: 2.313rem;
+  }
+
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --fs-300: 0.909rem;
+    --fs-400: 1rem;
+    --fs-500: 1.1rem;
+    --fs-600: 1.21rem;
+    --fs-700: 1.331rem;
+    --fs-800: 1.464rem;
+    --fs-900: 1.611rem;
+    --fs-1000: 1.772rem;
+  }
+
+  html {
+    font-size: 14px;
+  }
+}
