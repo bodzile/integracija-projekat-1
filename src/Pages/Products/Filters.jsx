@@ -35,7 +35,7 @@ const Filters = ({categories, filterProducts}) => {
 
             {isOpen && (
                 <button type="button" onClick={() => setIsOpen(false)} className="fixed inset-0 z-40 bg-black/50 xl:hidden">
-                    Close filters
+
                 </button>
             )}
 
@@ -95,7 +95,7 @@ const Filters = ({categories, filterProducts}) => {
                         </div>
 
                         <div className="space-y-3">
-                            <button onClick={() => filterProducts(buildFilterObject())} className="w-full rounded-md py-2 border border-(--color-accent)">Filtriraj</button>
+                            <button onClick={() => filterProducts(buildFilterObject())} className="w-full rounded-md py-2 border border-(--color-accent) transition-all hover:bg-[var(--color-accent)] hover:text-[var(--color-surface-dim)]">Filter</button>
                         </div>
 
                     </div>

@@ -14,7 +14,7 @@ const ProductList = ({products, createProduct, updateProduct, deleteProduct}) =>
             <button
                 type="button"
                 onClick={() => {setProductData(null); setModalAction(() => createProduct); setIsModalOpen(true)} }
-                className="rounded-md border border-blue-400 px-3 py-1 text-blue-400">
+                className="rounded-md border transition-all border-blue-500 px-3 py-1 text-blue-500 hover:bg-blue-500 hover:text-white">
                 Add product
             </button>
             <Modal
@@ -62,12 +62,12 @@ const ProductList = ({products, createProduct, updateProduct, deleteProduct}) =>
                                 <div className="flex gap-2">
                                     <button onClick={() => { setProductData(getProductById(id)); setModalAction(() => updateProduct); setIsModalOpen(true)}}
                                         type="button"
-                                        className="rounded-md border border-[var(--color-text-heading)] px-3 py-1 text-text-heading">
+                                        className="rounded-md border border-[var(--color-text-heading)] transition-all hover:bg-white hover:text-black  px-3 py-1 text-text-[var(--color-text-heading)]">
                                         Edit
                                     </button>
                                     <button onClick={() => deleteProduct(id) }
                                         type="button"
-                                        className="rounded-md border border-red-400 px-3 py-1 text-red-400">
+                                        className="rounded-md border transition-all border-red-500 px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white">
                                         Delete
                                     </button>
                                 </div>

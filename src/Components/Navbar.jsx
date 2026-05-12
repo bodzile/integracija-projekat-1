@@ -20,8 +20,8 @@ const Navbar = () => {
             <div className="hidden md:flex md:items-center md:w-auto w-full" id="menu">
                 <nav>
                     <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                        <li><NavLink className="md:p-4 py-3 px-0 block text-accent" to="/">Home</NavLink></li>
-                        <li><NavLink className="md:p-4 py-3 px-0 block text-accent" to="/products">Products</NavLink></li>
+                        <li><NavLink className="md:p-4 py-3 px-0 block text-accent transition-all hover:brightness-75" to="/">Home</NavLink></li>
+                        <li><NavLink className="md:p-4 py-3 px-0 block text-accent transition-all hover:brightness-75" to="/products">Products</NavLink></li>
                     </ul>
                 </nav>
             </div>
